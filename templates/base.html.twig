@@ -2,11 +2,45 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>MySquelette - {% block title %}Base page{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ asset('libs/Semantic-UI/semantic.min.css') }}" media="screen"/>
+        <link rel="stylesheet" href="{{ asset('libs/fancybox/dist/jquery.fancybox.min.css') }}" media="screen"/>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="ui sidebar inverted vertical menu">
+            {% include "menu/sideNavBar.html.twig" %}
+        </div>
+        <div class="pusher">
+            {% include 'menu/mainNavBar.html.twig' %}
+            {% include "menu/sideNavBar.html.twig" %}
+
+            <div class="ui container" style="margin-top: 70px;">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        
+        <script type="text/javascript" lang="javascript" src="{{ asset('libs/jquery-3.4.1.min.js') }}"></script>
+        <script type="text/javascript" lang="javascript" src="{{ asset('libs/Semantic-UI/semantic.min.js') }}"></script>
+        <script type="text/javascript" lang="javascript" src="{{ asset('libs/fancybox/dist/jquery.fancybox.min.js') }}"></script>
+        <script type="text/javascript" lang="javascript">
+
+            
+        
+            $(document).ready(function(){
+
+                $('#toggleSideBar').click(function(){
+                    $('.ui.sidebar').sidebar('toggle');
+                });
+
+                $('.ui.dropdown').dropdown({
+                    clearable: true
+                })
+
+            });
+
+        </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
